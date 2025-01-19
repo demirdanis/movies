@@ -8,17 +8,17 @@ import { notFound } from "next/navigation";
 
 const MovieDetailPage = async ({ params }: { params: { id: string } }) => {
   const data = await fetchMovieDetails(params.id);
-
-  if (!data) {
-    notFound();
-  }
-
   return (
     <Box sx={{ padding: 3 }}>
       {data ? (
         <Stack spacing={3}>
           <Box margin="auto">
-            <img src={data.Poster} alt={data.Title} height={180} width="auto" />
+            <img
+              src={data.Poster === "N/A" ? "/noImageBig.jpg" : data.Poster}
+              alt={data.Title}
+              height={180}
+              width="auto"
+            />
           </Box>
           <Typography variant="h4">
             {data.Title} ({data.Year})
@@ -85,9 +85,12 @@ const MovieDetailPage = async ({ params }: { params: { id: string } }) => {
   );
 };
 
-let pageData: IOMDbAPIMovieDetailReponse | undefined = undefined;
-
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const pageData = await fetchMovieDetails(params.id);
   return {
     title: `${pageData?.Title} (${pageData?.Year}) - IMDb Details`,
     description: pageData?.Plot || "No description available for this movie.",
@@ -95,7 +98,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function fetchMovieDetails(id: string) {
-  pageData = await getMovieDetailsSSR(id);
+  const pageData: IOMDbAPIMovieDetailReponse = await getMovieDetailsSSR(id);
+
+  if (!pageData) {
+    notFound();
+  }
   return pageData;
 }
 
