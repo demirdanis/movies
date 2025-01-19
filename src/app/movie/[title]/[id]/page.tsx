@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { Box, Stack, Typography } from "@mui/material";
 
@@ -6,7 +7,7 @@ import { Metadata } from "next";
 import { getMovieDetailsSSR } from "@/services/moviesApi";
 import { notFound } from "next/navigation";
 
-const MovieDetailPage = async ({ params }: { params: { id: string } }) => {
+const MovieDetailPage = async ({ params }: any) => {
   const data = await fetchMovieDetails(params.id);
   return (
     <Box sx={{ padding: 3 }}>
@@ -85,15 +86,12 @@ const MovieDetailPage = async ({ params }: { params: { id: string } }) => {
   );
 };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const pageData = await fetchMovieDetails(params.id);
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+  const data = await fetchMovieDetails(params.id);
+
   return {
-    title: `${pageData?.Title} (${pageData?.Year}) - IMDb Details`,
-    description: pageData?.Plot || "No description available for this movie.",
+    title: `${data?.Title} (${data?.Year}) - IMDb Details`,
+    description: data?.Plot || "No description available for this movie.",
   };
 }
 

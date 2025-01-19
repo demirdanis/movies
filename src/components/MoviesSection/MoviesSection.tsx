@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Stack, Typography } from "@mui/material";
 
 import { IMoviesSection } from "./MoviesSection.types";

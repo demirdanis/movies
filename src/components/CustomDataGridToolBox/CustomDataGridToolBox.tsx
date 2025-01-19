@@ -6,7 +6,6 @@ import {
 
 import CustomDataGridQuickSearchToolBox from "../CustomDataGridQuickSearchToolBox/CustomDataGridQuickSearchToolBox";
 import { ICustomDataGridToolBox } from "./CustomDataGridToolBox.types";
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Stack } from "@mui/material";
 
 export default function CustomDataGridToolBox({
