@@ -21,6 +21,7 @@ export default function CustomDataGridFilterPanel() {
           variant: "outlined",
           size: "medium",
           sx: {
+            display: "none",
             width: "84px",
           },
         },
