@@ -10,7 +10,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { GridFilterModel } from "@mui/x-data-grid-pro";
 import { IMovie } from "@/types/movie";
-import { LicenseInfo } from "@mui/x-license";
 import { MoviesGridColumnFieldNames } from "@/components/MoviesSection/MoviesSection.types";
 import MoviesSection from "@/components/MoviesSection/MoviesSection";
 import { convertOMDbAPIMoviesResponseToGridMoviesData } from "@/services/mappers/moviesMapper";
@@ -20,7 +19,6 @@ import { prepareMovieTitleSlug } from "@/utils/slugify";
 import { useGetMoviesQuery } from "@/services/moviesApi";
 import { useRouter } from "next/navigation";
 
-LicenseInfo.setLicenseKey(process.env.MUI_DATAGRID_PRO_KEY ?? "");
 export default function Movies() {
   const router = useRouter();
 
